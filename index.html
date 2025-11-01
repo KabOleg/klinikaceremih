@@ -1,1 +1,561 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Клиника доктора Черемных</title>
+    <style>
+        :root {
+            --primary-color: #2c7ab0;
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+            --bg-color: #fff;
+            --card-bg: #f8f9fa;
+            --header-bg: #fff;
+            --footer-bg: #343a40;
+            --footer-text: #fff;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
 
+        .dark-mode {
+            --primary-color: #4a9bd8;
+            --secondary-color: #343a40;
+            --text-color: #f8f9fa;
+            --bg-color: #212529;
+            --card-bg: #343a40;
+            --header-bg: #343a40;
+            --footer-bg: #212529;
+            --footer-text: #f8f9fa;
+            --shadow: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .theme-toggle i {
+            margin-right: 5px;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://source.unsplash.com/random/1600x900/?dentist') no-repeat center center/cover;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1a5a8a;
+        }
+
+        .services {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .service-card:hover .service-img img {
+            transform: scale(1.1);
+        }
+
+        .service-content {
+            padding: 20px;
+        }
+
+        .service-content h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .doctors {
+            padding: 80px 0;
+            background-color: var(--secondary-color);
+        }
+
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .doctor-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow);
+            text-align: center;
+        }
+
+        .doctor-img {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .doctor-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .doctor-info {
+            padding: 20px;
+        }
+
+        .doctor-info h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .doctor-info p {
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .contact {
+            padding: 80px 0;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        .contact-form button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 5px 10px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Стоматология "Улыбка"</div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#services">Услуги</a></li>
+                        <li><a href="#doctors">Врачи</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle" id="themeToggle">
+                    <i>🌙</i> Ночной режим
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Здоровая улыбка на всю жизнь</h1>
+                <p>Современная стоматология с заботой о вашем комфорте и здоровье. Мы используем передовые технологии для достижения наилучших результатов.</p>
+                <a href="#contact" class="btn">Записаться на прием</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Наши услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://source.unsplash.com/random/600x400/?teeth,whitening" alt="Отбеливание зубов">
+                    </div>
+                    <div class="service-content">
+                        <h3>Отбеливание зубов</h3>
+                        <p>Современные методы отбеливания для ослепительной улыбки. Безопасно и эффективно.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://source.unsplash.com/random/600x400/?dental,implant" alt="Имплантация">
+                    </div>
+                    <div class="service-content">
+                        <h3>Имплантация</h3>
+                        <p>Восстановление утраченных зубов с помощью современных имплантов.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://source.unsplash.com/random/600x400/?orthodontics" alt="Ортодонтия">
+                    </div>
+                    <div class="service-content">
+                        <h3>Ортодонтия</h3>
+                        <p>Исправление прикуса и выравнивание зубов с помощью брекетов и элайнеров.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://source.unsplash.com/random/600x400/?dental,checkup" alt="Профилактика">
+                    </div>
+                    <div class="service-content">
+                        <h3>Профилактика и гигиена</h3>
+                        <p>Профессиональная чистка и профилактические процедуры для здоровья зубов.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://source.unsplash.com/random/600x400/?dental,crown" alt="Протезирование">
+                    </div>
+                    <div class="service-content">
+                        <h3>Протезирование</h3>
+                        <p>Изготовление и установка коронок, мостов и других зубных протезов.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">
+                        <img src="https://source.unsplash.com/random/600x400/?dental,surgery" alt="Хирургия">
+                    </div>
+                    <div class="service-content">
+                        <h3>Хирургия</h3>
+                        <p>Удаление зубов, операции на деснах и другие хирургические вмешательства.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="doctors" id="doctors">
+        <div class="container">
+            <h2 class="section-title">Наши врачи</h2>
+            <div class="doctors-grid">
+                <div class="doctor-card">
+                    <div class="doctor-img">
+                        <img src="https://source.unsplash.com/random/600x600/?doctor,female" alt="Доктор Иванова">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Анна Иванова</h3>
+                        <p>Стоматолог-терапевт</p>
+                        <p>Стаж работы: 12 лет</p>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-img">
+                        <img src="https://source.unsplash.com/random/600x600/?doctor,male" alt="Доктор Петров">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Сергей Петров</h3>
+                        <p>Стоматолог-хирург</p>
+                        <p>Стаж работы: 15 лет</p>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-img">
+                        <img src="https://source.unsplash.com/random/600x600/?doctor,woman" alt="Доктор Сидорова">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Ольга Сидорова</h3>
+                        <p>Ортодонт</p>
+                        <p>Стаж работы: 10 лет</p>
+                    </div>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-img">
+                        <img src="https://source.unsplash.com/random/600x600/?dentist" alt="Доктор Козлов">
+                    </div>
+                    <div class="doctor-info">
+                        <h3>Алексей Козлов</h3>
+                        <p>Стоматолог-ортопед</p>
+                        <p>Стаж работы: 8 лет</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Наши контакты</h3>
+                    <p><strong>Адрес:</strong> г. Москва, ул. Стоматологическая, д. 15</p>
+                    <p><strong>Телефон:</strong> +7 (495) 123-45-67</p>
+                    <p><strong>Email:</strong> info@smile-dent.ru</p>
+                    <p><strong>Режим работы:</strong></p>
+                    <p>Пн-Пт: 9:00 - 21:00</p>
+                    <p>Сб-Вс: 10:00 - 18:00</p>
+                </div>
+                <div class="contact-form">
+                    <h3>Записаться на прием</h3>
+                    <form id="appointmentForm">
+                        <input type="text" placeholder="Ваше имя" required>
+                        <input type="tel" placeholder="Ваш телефон" required>
+                        <input type="email" placeholder="Ваш email" required>
+                        <textarea placeholder="Сообщение" rows="5"></textarea>
+                        <button type="submit" class="btn">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Стоматология "Улыбка"</h3>
+                    <p>Мы заботимся о здоровье ваших зубов и красоте вашей улыбки.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Быстрые ссылки</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="#home" style="color: var(--footer-text);">Главная</a></li>
+                        <li><a href="#services" style="color: var(--footer-text);">Услуги</a></li>
+                        <li><a href="#doctors" style="color: var(--footer-text);">Врачи</a></li>
+                        <li><a href="#contact" style="color: var(--footer-text);">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Социальные сети</h3>
+                    <p>Следите за нами в соцсетях</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Стоматология "Улыбка". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Проверяем сохраненную тему в localStorage
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i>☀️</i> Дневной режим';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i>☀️</i> Дневной режим';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<i>🌙</i> Ночной режим';
+            }
+        });
+
+        // Обработка формы
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
